@@ -1,7 +1,7 @@
 import { useDeviceOrientation } from '@react-native-community/hooks';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
-import { ActivityIndicator, Button, FlatList, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { ActivityIndicator, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 
 export default function App({ route }) {
   const { name } = route.params;
@@ -11,6 +11,12 @@ export default function App({ route }) {
   const [refreshing, setRefreshing] = useState(false);
 
   const orientation = useDeviceOrientation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: name
+    });
+  }, [navigation, name]);
 
   const fetchData = async (limit = 1) => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`);
@@ -42,7 +48,7 @@ export default function App({ route }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.listContainer}>
+      {/* <View style={styles.listContainer}>
         {name && <Text>About {name}</Text>}
         <Button title="Go to home" onPress={() => navigation.navigate('Home')}></Button>
         <FlatList
@@ -58,6 +64,122 @@ export default function App({ route }) {
             );
           }}
         />
+      </View> */}
+      <View style={{
+        marginTop: 50
+      }}>
+        <View style={
+          {
+            backgroundColor: 'red',
+            height: 70,
+            width: 80,
+          }
+        } />
+        <View style={
+          {
+            backgroundColor: 'yellow',
+            height: 70,
+            width: 80,
+          }
+        } />
+        <View style={
+          {
+            backgroundColor: 'orange',
+            height: 70,
+            width: 80,
+          }
+        } />
+      </View>
+      <View style={
+        {
+          flex: 1,
+          flexWrap: 'wrap',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          gap: 10
+        }
+      }>
+        <View style={
+          {
+            backgroundColor: 'blue',
+            height: 100,
+            width: 200,
+            flexGrow: 1
+          }
+        } />
+        <View style={{
+          flexDirection: 'column'
+        }}>
+          <View style={
+            {
+              backgroundColor: 'brown',
+              height: 120,
+              width: 80,
+            }
+          } />
+          <View style={
+            {
+              backgroundColor: 'green',
+              height: 100,
+              width: 80,
+            }
+          } />
+          <View style={
+            {
+              backgroundColor: 'violet',
+              height: 80,
+              width: 80,
+            }
+          } />
+        </View>
+        <View style={{
+          flexDirection: 'column'
+        }}>
+          <View style={
+            {
+              backgroundColor: 'brown',
+              height: 120,
+              width: 80,
+            }
+          } />
+          <View style={
+            {
+              backgroundColor: 'green',
+              height: 100,
+              width: 80,
+            }
+          } />
+          <View style={
+            {
+              backgroundColor: 'violet',
+              height: 80,
+              width: 80,
+            }
+          } />
+        </View>
+      </View>
+      <View>
+        <View style={
+          {
+            backgroundColor: 'red',
+            height: 70,
+            width: 80,
+          }
+        } />
+        <View style={
+          {
+            backgroundColor: 'yellow',
+            height: 70,
+            width: 80,
+          }
+        } />
+        <View style={
+          {
+            backgroundColor: 'orange',
+            height: 70,
+            width: 80,
+          }
+        } />
       </View>
     </SafeAreaView>
   );
@@ -66,6 +188,8 @@ export default function App({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    gap: 15,
+    flexDirection: 'row',
     backgroundColor: '#f5f5f5',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
   },

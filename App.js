@@ -49,9 +49,12 @@ export default function App() {
               backgroundColor: "#e8e4f3"
             }
           }} />
-        <Stack.Screen name="About" component={AboutScreen} options={{
-          headerLeft: () => (<></>)
-        }} />
+        <Stack.Screen name="About" component={AboutScreen}
+        // options={({ route }) => ({
+        //   title: route.params.name,
+        //   headerLeft: () => (<></>)
+        // })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
