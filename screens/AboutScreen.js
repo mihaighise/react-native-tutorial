@@ -11,8 +11,6 @@ export default function App({ route }) {
   const [refreshing, setRefreshing] = useState(false);
 
   const orientation = useDeviceOrientation();
-  console.log('orientation is:', orientation);
-  console.log('Hello World');
 
   const fetchData = async (limit = 1) => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`);
