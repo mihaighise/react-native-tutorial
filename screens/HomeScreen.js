@@ -2,7 +2,8 @@ import { useDeviceOrientation } from '@react-native-community/hooks';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Button, FlatList, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 
-export default function App({ navigation }) {
+export default function App({ navigation, route }) {
+  const { firstName } = route.params;
   const [postList, setPostList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -40,7 +41,9 @@ export default function App({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.listContainer}>
-        <Button title="Go to about" onPress={() => navigation.navigate('About')}></Button>
+        {firstName && <Text>My name is {firstName}</Text>}
+        <Button title="Go to about" onPress={() => navigation.navigate('About',
+          { name: 'Passed name' })}></Button>
         <FlatList
           data={postList}
           refreshing={refreshing}

@@ -3,7 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Button, FlatList, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+export default function App({ route }) {
+  const { name } = route.params;
   const navigation = useNavigation();
   const [postList, setPostList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -44,6 +45,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.listContainer}>
+        {name && <Text>About {name}</Text>}
         <Button title="Go to home" onPress={() => navigation.navigate('Home')}></Button>
         <FlatList
           data={postList}
